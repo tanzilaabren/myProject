@@ -1,4 +1,3 @@
-// 🔠 Переводы на два языка
 const translations = {
     kz: {
       title: "Менің тапсырмалар тізімім",
@@ -14,56 +13,44 @@ const translations = {
     }
   };
   
-  // 🌐 Установка языка
+  let currentLang = "ru";
+  
   function setLanguage(lang) {
+    currentLang = lang;
     const t = translations[lang];
+    document.getElementById("title").textContent = t.title;
+    document.getElementById("taskInput").placeholder = t.placeholder;
+    document.getElementById("addTaskBtn").textContent = t.addButton;
   
-    document.querySelector("#title").innerText = t.title;
-    document.querySelector("#taskInput").placeholder = t.placeholder;
-    document.querySelector("#addButton").innerText = t.addButton;
+    document.querySelectorAll(".delete-btn").forEach((btn) => {
+      btn.textContent = t.deleteButton;
+    });
+  }
   
-    document.querySelectorAll(".delete-btn").forEach(btn => {
-      btn.innerText = t.deleteButton;
+  document.addEventListener("DOMContentLoaded", () => {
+    const taskInput = document.getElementById("taskInput");
+    const taskList = document.getElementById("taskList");
+    const addTaskBtn = document.getElementById("addTaskBtn");
+  
+    function createTask(text) {
+      const li = document.createElement("li");
+      li.className = "task-item";
+      li.innerHTML = `
+        <span>${text}</span>
+        <button class="delete-btn">${translations[currentLang].deleteButton}</button>
+      `;
+      li.querySelector("button").onclick = () => li.remove();
+      taskList.appendChild(li);
+    }
+  
+    addTaskBtn.addEventListener("click", () => {
+      const taskText = taskInput.value.trim();
+      if (taskText !== "") {
+        createTask(taskText);
+        taskInput.value = "";
+      }
     });
   
-    localStorage.setItem("lang", lang);
-  }
-  
-  // ✅ Добавление задачи
-  function addTask() {
-    const input = document.getElementById("taskInput");
-    const taskText = input.value.trim();
-    if (taskText === "") return;
-  
-    const taskList = document.getElementById("taskList");
-  
-    const taskItem = document.createElement("li");
-    taskItem.className = "task-item";
-  
-    const span = document.createElement("span");
-    span.innerText = taskText;
-  
-    const deleteBtn = document.createElement("button");
-    deleteBtn.className = "delete-btn";
-    deleteBtn.innerText = translations[getCurrentLang()].deleteButton;
-    deleteBtn.onclick = () => taskItem.remove();
-  
-    taskItem.appendChild(span);
-    taskItem.appendChild(deleteBtn);
-    taskList.appendChild(taskItem);
-  
-    input.value = "";
-  }
-  
-  // 🧠 Получить текущий язык
-  function getCurrentLang() {
-    return localStorage.getItem("lang") || "ru";
-  }
-  
-  // ▶️ Запускаем при загрузке страницы
-  window.onload = () => {
-    setLanguage(getCurrentLang());
-  
-    document.getElementById("addButton").addEventListener("click", addTask);
-  };
+    setLanguage(currentLang);
+  });
   
