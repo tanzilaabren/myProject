@@ -7,30 +7,21 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
   <header>
     <div class="lang-switch">
-      <!-- эти кнопки вызывают нашу функцию setLanguage(...) -->
       <button onclick="setLanguage('kz')">🇰🇿 KZ</button>
       <button onclick="setLanguage('ru')">🇷🇺 RU</button>
     </div>
   </header>
-
   <main>
-    <!-- здесь идёт заголовок, его мы меняем в JS -->
     <h1 id="title">Мой список дел</h1>
-
     <div class="task-input">
-      <!-- input и кнопка должны иметь именно такие id -->
       <input  type="text" id="taskInput" placeholder="Добавить новую задачу" />
+      <!-- Переименовали id -->
       <button id="addTaskBtn">Добавить</button>
     </div>
-
-    <!-- сюда мы добавляем элементы списка -->
     <ul id="taskList"></ul>
   </main>
-
-  <!-- скрипт подключаем в самом конце, чтобы DOM уже был готов -->
   <script src="app.js"></script>
 </body>
 </html>

@@ -1,16 +1,6 @@
 const translations = {
-  kz: {
-    title: "Менің тапсырмалар тізімім",
-    placeholder: "Жаңа тапсырма қосу",
-    addButton: "Қосу",
-    deleteButton: "Жою"
-  },
-  ru: {
-    title: "Мой список дел",
-    placeholder: "Добавить новую задачу",
-    addButton: "Добавить",
-    deleteButton: "Удалить"
-  }
+  kz: { title: "Менің тапсырмалар тізімім", placeholder: "Жаңа тапсырма қосу", addButton: "Қосу", deleteButton: "Жою" },
+  ru: { title: "Мой список дел",                 placeholder: "Добавить новую задачу", addButton: "Добавить", deleteButton: "Удалить" }
 };
 
 let currentLang = "ru";
@@ -21,10 +11,7 @@ function setLanguage(lang) {
   document.getElementById("title").textContent      = t.title;
   document.getElementById("taskInput").placeholder = t.placeholder;
   document.getElementById("addTaskBtn").textContent = t.addButton;
-
-  document.querySelectorAll(".delete-btn").forEach(btn => {
-    btn.textContent = t.deleteButton;
-  });
+  document.querySelectorAll(".delete-btn").forEach(btn => btn.textContent = t.deleteButton);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -50,6 +37,5 @@ document.addEventListener("DOMContentLoaded", () => {
     taskInput.value = "";
   });
 
-  // Устанавливаем язык сразу при загрузке
   setLanguage(currentLang);
 });
