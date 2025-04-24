@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Todo App</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -10,22 +10,27 @@
 
   <header>
     <div class="lang-switch">
+      <!-- эти кнопки вызывают нашу функцию setLanguage(...) -->
       <button onclick="setLanguage('kz')">🇰🇿 KZ</button>
       <button onclick="setLanguage('ru')">🇷🇺 RU</button>
     </div>
   </header>
 
   <main>
+    <!-- здесь идёт заголовок, его мы меняем в JS -->
     <h1 id="title">Мой список дел</h1>
 
     <div class="task-input">
-      <input type="text" id="taskInput" placeholder="Добавить новую задачу" />
-      <button id="addButton">Добавить</button>
+      <!-- input и кнопка должны иметь именно такие id -->
+      <input  type="text" id="taskInput" placeholder="Добавить новую задачу" />
+      <button id="addTaskBtn">Добавить</button>
     </div>
 
+    <!-- сюда мы добавляем элементы списка -->
     <ul id="taskList"></ul>
   </main>
 
+  <!-- скрипт подключаем в самом конце, чтобы DOM уже был готов -->
   <script src="app.js"></script>
 </body>
 </html>
