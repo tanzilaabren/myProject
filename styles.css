@@ -1,69 +1,97 @@
-* {
-    box-sizing: border-box;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
-  body {
-    font-family: Arial, sans-serif;
-    background: #f0f0f0;
-    padding: 20px;
+  header {
+    width: 100%;
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: flex-end;
   }
   
-  .container {
-    max-width: 400px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  .lang-switch button {
+    margin-left: 0.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 1rem;
+  }
+  
+  main {
+    max-width: 600px;
+    width: 100%;
+    padding: 2rem;
   }
   
   h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 1.5rem;
   }
   
-  #todo-form {
+  .task-input {
     display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
   }
   
-  #todo-input {
+  .task-input input {
     flex: 1;
-    padding: 8px;
-    font-size: 16px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
   }
   
-  #todo-form button {
-    padding: 8px 12px;
-    margin-left: 8px;
-    font-size: 16px;
+  .task-input button {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #3f51b5;
+    color: white;
     cursor: pointer;
   }
   
-  #todo-list {
-    list-style: none;
-    margin-top: 20px;
+  .task-input button:hover {
+    background-color: #303f9f;
   }
   
-  #todo-list li {
+  #taskList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .task-item {
+    background-color: white;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.75rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   }
   
-  #todo-list li.completed .text {
-    text-decoration: line-through;
-    color: #888;
-  }
-  
-  .todo-btns button {
-    background: none;
+  .delete-btn {
+    background-color: #e57373;
     border: none;
+    padding: 0.4rem 0.8rem;
+    color: white;
+    border-radius: 6px;
     cursor: pointer;
-    margin-left: 8px;
-    font-size: 18px;
+  }
+  
+  .delete-btn:hover {
+    background-color: #d32f2f;
   }
   

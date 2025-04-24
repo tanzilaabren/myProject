@@ -1,50 +1,69 @@
-// 1) Найдём элементы на странице
-const form = document.getElementById('todo-form');
-const input = document.getElementById('todo-input');
-const list  = document.getElementById('todo-list');
-
-// 2) Загрузить сохранённые задачи из localStorage
-let todos = JSON.parse(localStorage.getItem('todos')) || [];
-renderTodos();
-
-// 3) Обработчик отправки формы
-form.addEventListener('submit', function(e) {
-  e.preventDefault();
-  const text = input.value.trim();
-  if (!text) return;
-  todos.push({ text, done: false });
-  saveAndRender();
-  input.value = '';
-});
-
-// 4) Функция сохранения и перерисовки
-function saveAndRender() {
-  localStorage.setItem('todos', JSON.stringify(todos));
-  renderTodos();
-}
-
-// 5) Рендер списка
-function renderTodos() {
-  list.innerHTML = '';
-  todos.forEach((todo, i) => {
-    const li = document.createElement('li');
-    li.className = todo.done ? 'completed' : '';
-    li.innerHTML = `
-      <span class="text">${todo.text}</span>
-      <span class="todo-btns">
-        <button data-action="toggle" title="Выполнить">✓</button>
-        <button data-action="delete" title="Удалить">🗑</button>
-      </span>
-    `;
-    // Кнопки «выполнить» и «удалить»
-    li.querySelector('[data-action="toggle"]').addEventListener('click', () => {
-      todos[i].done = !todos[i].done;
-      saveAndRender();
+// 🔠 Переводы на два языка
+const translations = {
+    kz: {
+      title: "Менің тапсырмалар тізімім",
+      placeholder: "Жаңа тапсырма қосу",
+      addButton: "Қосу",
+      deleteButton: "Жою"
+    },
+    ru: {
+      title: "Мой список дел",
+      placeholder: "Добавить новую задачу",
+      addButton: "Добавить",
+      deleteButton: "Удалить"
+    }
+  };
+  
+  // 🌐 Установка языка
+  function setLanguage(lang) {
+    const t = translations[lang];
+  
+    document.querySelector("#title").innerText = t.title;
+    document.querySelector("#taskInput").placeholder = t.placeholder;
+    document.querySelector("#addButton").innerText = t.addButton;
+  
+    document.querySelectorAll(".delete-btn").forEach(btn => {
+      btn.innerText = t.deleteButton;
     });
-    li.querySelector('[data-action="delete"]').addEventListener('click', () => {
-      todos.splice(i, 1);
-      saveAndRender();
-    });
-    list.append(li);
-  });
-}
+  
+    localStorage.setItem("lang", lang);
+  }
+  
+  // ✅ Добавление задачи
+  function addTask() {
+    const input = document.getElementById("taskInput");
+    const taskText = input.value.trim();
+    if (taskText === "") return;
+  
+    const taskList = document.getElementById("taskList");
+  
+    const taskItem = document.createElement("li");
+    taskItem.className = "task-item";
+  
+    const span = document.createElement("span");
+    span.innerText = taskText;
+  
+    const deleteBtn = document.createElement("button");
+    deleteBtn.className = "delete-btn";
+    deleteBtn.innerText = translations[getCurrentLang()].deleteButton;
+    deleteBtn.onclick = () => taskItem.remove();
+  
+    taskItem.appendChild(span);
+    taskItem.appendChild(deleteBtn);
+    taskList.appendChild(taskItem);
+  
+    input.value = "";
+  }
+  
+  // 🧠 Получить текущий язык
+  function getCurrentLang() {
+    return localStorage.getItem("lang") || "ru";
+  }
+  
+  // ▶️ Запускаем при загрузке страницы
+  window.onload = () => {
+    setLanguage(getCurrentLang());
+  
+    document.getElementById("addButton").addEventListener("click", addTask);
+  };
+  

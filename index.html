@@ -1,20 +1,31 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Todo List</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo App</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Мой список дел</h1>
-    <form id="todo-form">
-      <input type="text" id="todo-input" placeholder="Что нужно сделать?" required>
-      <button type="submit">Добавить</button>
-    </form>
-    <ul id="todo-list"></ul>
-  </div>
+
+  <header>
+    <div class="lang-switch">
+      <button onclick="setLanguage('kz')">🇰🇿 KZ</button>
+      <button onclick="setLanguage('ru')">🇷🇺 RU</button>
+    </div>
+  </header>
+
+  <main>
+    <h1 id="title">Мой список дел</h1>
+
+    <div class="task-input">
+      <input type="text" id="taskInput" placeholder="Добавить новую задачу" />
+      <button id="addButton">Добавить</button>
+    </div>
+
+    <ul id="taskList"></ul>
+  </main>
+
   <script src="app.js"></script>
 </body>
 </html>
